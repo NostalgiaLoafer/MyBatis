@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--    <settings>
+        &lt;!&ndash;显示的指定每个我们需要更改的配置的值，即使他是默认的。防止版本更新带来的问题  &ndash;&gt;
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?&amp;serverTimezone=UTC" />
+                <property name="username" value="root" />
+                <property name="password" value="1234" />
+            </dataSource>
+        </environment>
+
+    </environments>
+    <!-- 将我们写好的sql映射文件（EmployeeMapper.xml）一定要注册到全局配置文件（mybatis-config.xml）中 -->
+    <mappers>
+        <mapper resource="EmployeeMapper.xml" />
+        <mapper resource="EmployeeMapperPlus.xml" />
+        <mapper resource="DepartmentMapper.xml" />
+    </mappers>
+
+</configuration>
