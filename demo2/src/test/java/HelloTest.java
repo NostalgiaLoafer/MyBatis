@@ -41,9 +41,36 @@ public class HelloTest {
         }
     }
 
+
+    @Test
+    // EmployeeMapper.class
+    public void t2() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+
+        SqlSession openSession = sqlSessionFactory.openSession();
+        try {
+            EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+
+            List<Employee> emps = mapper.getEmpByLastNameLike("马%");
+            for (Employee employee : emps){
+                System.out.println(employee);
+            }
+
+            Map<String, Employee> map = mapper.getEmpByLastNameLikeReturnMap("马%");
+            System.out.println(map);
+
+            Map<String, Object> map1 = mapper.getEmpByIdReturnMap(1);
+            System.out.println(map1);
+
+        } finally {
+            openSession.close();
+        }
+    }
+
+
     @Test
     // EmployeeMapperPlus.class
-    public void t2() throws IOException {
+    public void t3() throws IOException {
 
         SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
 
@@ -52,8 +79,8 @@ public class HelloTest {
             EmployeeMapperPlus mapper = openSession.getMapper(EmployeeMapperPlus.class);
 
             // getEmpAndDept
-/*            Employee employee = mapper.getEmpAndDept(1);
-            System.out.println(employee);*/
+            Employee employee = mapper.getEmpAndDept(1);
+            System.out.println(employee);
 
             // getEmpByIdStep
 /*            Employee employee = mapper.getEmpByIdStep(1);
@@ -76,7 +103,7 @@ public class HelloTest {
 
     @Test
     // DepartmentMapper.class
-    public void t3() throws IOException {
+    public void t4() throws IOException {
 
         SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
 
